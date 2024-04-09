@@ -12,18 +12,18 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmailsToSubscribers = async (newsContentList) => {
-  const map = new Map();
+  const topicVsSubscriberListMap = new Map();
   for (const newsContent of newsContentList) {
-    let subscribers;
-    if (!map.has(newsContent.topic)) {
-      subscribers = await subscriberService.getSubscribersBySubscribedTopic(
+    let subscriberList;
+    if (!topicVsSubscriberListMap.has(newsContent.topic)) {
+      subscriberList = await subscriberService.getSubscribersBySubscribedTopic(
         newsContent.topic
       );
-      map.set(newsContent.topic, subscribers);
+      topicVsSubscriberListMap.set(newsContent.topic, subscriberList);
     } else {
-      subscribers = map.get(newsContent.topic);
+      subscriberList = topicVsSubscriberListMap.get(newsContent.topic);
     }
-    const emailIdList = subscribers.map((subscriber) => subscriber.email);
+    const emailIdList = subscriberList.map((subscriber) => subscriber.email);
     sendEmail(
       emailIdList,
       `New Story in ${newsContent.topic}`,
@@ -54,7 +54,7 @@ const sendEmail = async (emailIdList, subject, text) => {
     } successfully.`
   );
   if (emailsFailed.length) {
-    console.error(
+    console.warn(
       `The emails could not be sent to ${emailsFailed.length} emails. They are:`,
       emailsFailed
     );

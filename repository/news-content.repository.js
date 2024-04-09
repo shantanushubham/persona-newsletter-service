@@ -16,7 +16,7 @@ const addNewsContent = async (newsContentData) => {
 
 const getNewsContentInRange = async (startTime, endTime, wasSent) => {
   try {
-    const whereQuery = {
+    let whereQuery = {
       time: {
         [Sequelize.Op.between]: [startTime, endTime],
       },

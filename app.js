@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require("./database-sync")
 
 const newsContentRouter = require("./route/news-content.route");
 const subscriberRouter = require("./route/subscriber.route");
