@@ -29,6 +29,12 @@ const sendEmail = async (emailIdList, subject, text) => {
       emailIdList.length
     } successfully.`
   );
+  if (emailsFailed.length) {
+    console.error(
+      `The emails could not be sent to ${emailsFailed.length} emails. They are:`,
+      emailsFailed
+    );
+  }
 };
 
 module.exports = { sendEmail };

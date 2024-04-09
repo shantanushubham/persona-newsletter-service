@@ -2,9 +2,7 @@ const User = require("../models/user");
 
 const addUser = async (userData) => {
   try {
-    const newUser = await User.create({
-      ...userData,
-    });
+    const newUser = await User.create({ ...userData });
     console.info(
       `User with email: ${newUser.email} and subscribed topic ${newUser.topic} successfully`
     );
@@ -15,11 +13,11 @@ const addUser = async (userData) => {
   }
 };
 
-const getUsersBySubscribedTopics = async (topicList) => {
+const getUsersBySubscribedTopics = async (topic) => {
   try {
     const users = await User.findAll({
       where: {
-        subscribedTopic: topicList,
+        subscribedTopic: topic,
       },
     });
     console.info(`Found ${users.length} users by the given topics`);
