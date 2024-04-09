@@ -16,6 +16,11 @@ const Subscriber = sequelize.define("subscriber", {
     type: Sequelize.ENUM(...Object.values(TopicEnum)),
     allowNull: false,
   },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+    allowNull: false,
+  },
 });
 
 module.exports = Subscriber;
