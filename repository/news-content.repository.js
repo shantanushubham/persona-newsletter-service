@@ -1,5 +1,5 @@
 const { Sequelize } = require("sequelize");
-const NewsContent = require("../models/newsContent");
+const NewsContent = require("../model/newsContent");
 
 const addNewsContent = async (newsContentData) => {
   try {

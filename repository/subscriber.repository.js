@@ -1,4 +1,4 @@
-const Subscriber = require("../models/subscriber");
+const Subscriber = require("../model/subscriber");
 
 const addSubscriber = async (subscriberData) => {
   try {

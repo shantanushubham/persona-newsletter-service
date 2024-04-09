@@ -18,7 +18,14 @@ const NewsContent = sequelize.define("news_content", {
   },
   time: {
     type: Sequelize.DATE,
-    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+    defaultValue: () => new Date(Date.now() + 2 * 60 * 60 * 1000),
+    validate: {
+      isAfterCurrentDate(value) {
+        if (value <= new Date()) {
+          throw new Error("Time must be after the current date");
+        }
+      },
+    },
     allowNull: false,
   },
   wasSent: {
