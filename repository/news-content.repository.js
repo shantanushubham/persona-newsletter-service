@@ -14,19 +14,18 @@ const addNewsContent = async (newsContentData) => {
   }
 };
 
-const getNewsContentInRange = async (startTime, endTime) => {
-  if (!startTime) {
-    let currentDate = new Date();
-    startTime = new Date(currentDate).setMinutes(currentDate.getMinutes() - 30);
-    endTime = new Date(currentDate).setMinutes(currentDate.getMinutes() + 30);
-  }
+const getNewsContentInRange = async (startTime, endTime, wasSent) => {
   try {
-    const newsContentList = await NewsContent.findAll({
-      where: {
-        time: {
-          [Sequelize.Op.between]: [startTime, endTime],
-        },
+    const whereQuery = {
+      time: {
+        [Sequelize.Op.between]: [startTime, endTime],
       },
+    };
+    if (wasSent === false) {
+      whereQuery = { ...whereQuery, wasSent };
+    }
+    const newsContentList = await NewsContent.findAll({
+      where: whereQuery,
     });
     console.info(`Found ${newsContentList.length} news content`);
     return newsContentList;
@@ -39,7 +38,24 @@ const getNewsContentInRange = async (startTime, endTime) => {
   }
 };
 
+const updateSentStatusOfNewsContent = async (newsContentList, status) => {
+  try {
+    const newsContentIds = newsContentList.map((newsContent) => newsContent.id);
+    const updateResult = await NewsContent.update(
+      { wasSent: status },
+      { where: { id: newsContentIds } }
+    );
+    console.info(
+      `Updated ${updateResult[0]} News Content instances with wasSent as ${status}`
+    );
+  } catch (err) {
+    console.error(`Error in updating the wasSent status`, error);
+    throw error;
+  }
+};
+
 module.exports = {
   addNewsContent,
   getNewsContentInRange,
+  updateSentStatusOfNewsContent,
 };

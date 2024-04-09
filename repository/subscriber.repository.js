@@ -13,7 +13,7 @@ const addSubscriber = async (subscriberData) => {
   }
 };
 
-const getSubscribersBySubscribedTopics = async (topic) => {
+const getSubscribersBySubscribedTopic = async (topic) => {
   try {
     const subscribers = await Subscriber.findAll({
       where: {
@@ -30,5 +30,5 @@ const getSubscribersBySubscribedTopics = async (topic) => {
 
 module.exports = {
   addSubscriber,
-  getSubscribersBySubscribedTopics,
+  getSubscribersBySubscribedTopic,
 };
