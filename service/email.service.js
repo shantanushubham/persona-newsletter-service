@@ -11,6 +11,12 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+/**
+ * Sends the emails to the subscribers on the basis of their subscribed topics
+ *
+ * @param {*} newsContentList the list of news content instances on the basis of which
+ * emails are to be sent
+ */
 const sendEmailsToSubscribers = async (newsContentList) => {
   const topicVsSubscriberListMap = new Map();
   for (const newsContent of newsContentList) {
@@ -35,6 +41,13 @@ const sendEmailsToSubscribers = async (newsContentList) => {
   }
 };
 
+/**
+ * This function sends an email.
+ *
+ * @param {*} emailIdList the list of email address to which emails are to be sent.
+ * @param {*} subject the subject of the email
+ * @param {*} text the email body
+ */
 const sendEmail = async (emailIdList, subject, text) => {
   let emailsFailed = [];
   for (const email of emailIdList) {

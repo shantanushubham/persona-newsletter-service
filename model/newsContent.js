@@ -2,6 +2,10 @@ const Sequelize = require("sequelize");
 const sequelize = require("../sequelize");
 const { TopicEnum } = require("./topic");
 
+/**
+ * This model represents the News Content that a subscriber
+ * will subscribe to
+ */
 const NewsContent = sequelize.define("news_content", {
   id: {
     type: Sequelize.INTEGER,

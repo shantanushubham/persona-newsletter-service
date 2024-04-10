@@ -1,5 +1,10 @@
 const Subscriber = require("../model/subscriber");
 
+/**
+ * 
+ * @param {*} subscriberData The info of the subscriber that is to be added.
+ * @returns The added subscriber.
+ */
 const addSubscriber = async (subscriberData) => {
   try {
     const newSubscriber = await Subscriber.create({ ...subscriberData });
@@ -13,6 +18,11 @@ const addSubscriber = async (subscriberData) => {
   }
 };
 
+/**
+ * 
+ * @param {*} topic The topic whose subscribers are required. 
+ * @returns the list of subscribers who are subscribed to the topic.
+ */
 const getSubscribersBySubscribedTopic = async (topic) => {
   try {
     const subscribers = await Subscriber.findAll({

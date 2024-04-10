@@ -2,6 +2,10 @@ const Sequelize = require("sequelize");
 const sequelize = require("../sequelize");
 const { TopicEnum } = require("./topic");
 
+/**
+ * This model represents the subscriber who will subscribe a certain topic
+ * of news contents.
+ */
 const Subscriber = sequelize.define("subscriber", {
   email: {
     type: Sequelize.STRING,
