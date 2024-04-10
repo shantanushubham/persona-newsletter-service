@@ -27,7 +27,7 @@ const getNewsContentInRange = async (startTime, endTime, wasSent) => {
     const newsContentList = await NewsContent.findAll({
       where: whereQuery,
     });
-    console.info(`Found ${newsContentList.length} news content`);
+    console.info(`Found ${newsContentList.length} news contents`);
     return newsContentList;
   } catch (error) {
     console.error(

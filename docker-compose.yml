@@ -12,6 +12,7 @@ services:
       DB_USER: dbuser
       DB_PASSWORD: dbpassword
       DB_NAME: newsletter
+      EMAIL_PASSWORD: "<enter-password>"
   db:
     image: postgres
     ports:

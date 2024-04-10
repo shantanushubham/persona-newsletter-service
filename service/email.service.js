@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
   service: "outlook",
   auth: {
     user: SENDER_EMAIL,
-    pass: "Some_Password",
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
@@ -30,7 +30,9 @@ const sendEmailsToSubscribers = async (newsContentList) => {
       newsContent.content
     );
   }
-  newsContentService.updateSentStatusOfNewsContent(newsContentList);
+  if (newsContentList.length) {
+    newsContentService.updateSentStatusOfNewsContent(newsContentList);
+  }
 };
 
 const sendEmail = async (emailIdList, subject, text) => {
