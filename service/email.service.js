@@ -42,12 +42,15 @@ const sendEmailsToSubscribers = async (newsContentList) => {
 };
 
 /**
- * This function sends an email.
+ * This function sends emails to the given list of emails.
  *
  * @param {*} emailIdList the list of email address to which emails are to be sent.
  * @param {*} subject the subject of the email
  * @param {*} text the email body
  */
+
+// TODO: It is preferred that it is handled using SendGrid, Brevo or
+// something similar.
 const sendEmail = async (emailIdList, subject, text) => {
   let emailsFailed = [];
   for (const email of emailIdList) {
